@@ -57,7 +57,6 @@ class AuthorController extends Controller
         $response->setStatusCode(Response::HTTP_OK);
         $response->title('Author');
         $response->message('Successfully created');
-        $response->data(null);
         return $response;
     }
 

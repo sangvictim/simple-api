@@ -8,7 +8,7 @@ class ResponseApi extends JsonResponse
 {
   protected string $message;
   protected string $title;
-  protected mixed $data;
+  protected mixed $originalData = [];
 
   function __construct()
   {
@@ -40,15 +40,15 @@ class ResponseApi extends JsonResponse
     return $this->title;
   }
 
-  public function data(mixed $data)
+  public function data(mixed $data): static
   {
-    $this->data = $data;
+    $this->originalData = $data;
     return $this->synchronizeData();
   }
 
-  public function getOriginData()
+  public function getOriginData(): mixed
   {
-    return $this->data;
+    return $this->originalData;
   }
 
   public function error(string $error)
@@ -59,12 +59,12 @@ class ResponseApi extends JsonResponse
     ]);
   }
 
-  public function formError(mixed $formError)
+  public function formError(mixed $errors): static
   {
     return parent::setData([
       'message' => $this->getMessage(),
       'title' => $this->getTitle(),
-      'formError' => $formError
+      'errors' => $errors
     ]);
   }
 

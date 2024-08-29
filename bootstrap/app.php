@@ -26,7 +26,6 @@ return Application::configure(basePath: dirname(__DIR__))
                 $result->statusCode(Response::HTTP_TOO_MANY_REQUESTS);
                 $result->title('Too Many Requests');
                 $result->message($e->getMessage());
-                $result->data(null);
                 return $result;
             }
         });
@@ -37,7 +36,6 @@ return Application::configure(basePath: dirname(__DIR__))
                 $result->statusCode(Response::HTTP_NOT_FOUND);
                 $result->title('Not Found');
                 $result->message("Not Found");
-                $result->data(null);
                 return $result;
             }
         });
@@ -48,7 +46,6 @@ return Application::configure(basePath: dirname(__DIR__))
                 $result->statusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
                 $result->title('Internal Server Error');
                 $result->message($e->getMessage());
-                $result->data(null);
                 return $result;
             }
         });
