@@ -81,9 +81,39 @@ class AuthorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Author $author)
+    public function update(Request $request)
     {
-        //
+        $response = new ResponseApi;
+        // find author
+        $author = Author::findOrFail($request->id);
+
+        // validation request
+        $validate = Validator::make($request->all(), [
+            'name' => 'required',
+            'bio' => 'required',
+            'birth_date' => 'required',
+        ]);
+
+        if ($validate->fails()) {
+
+            $response->setStatusCode(Response::HTTP_UNPROCESSABLE_ENTITY);
+            $response->title('Author');
+            $response->message('Validation error');
+            $response->formError($validate->errors());
+            return $response;
+        }
+
+        // create author
+        DB::transaction(function () use ($request, $author) {
+            $author->update($request->only(['name', 'bio', 'birth_date']));
+        });
+
+        // return success
+        $response->setStatusCode(Response::HTTP_OK);
+        $response->title('Author');
+        $response->message('Author successfully updated');
+        $response->data(null);
+        return $response;
     }
 
     /**

@@ -35,8 +35,8 @@ return Application::configure(basePath: dirname(__DIR__))
             if ($request->is('api/*')) {
                 $result = new ResponseApi;
                 $result->statusCode(Response::HTTP_NOT_FOUND);
-                $result->title('Route Not Found');
-                $result->message($e->getMessage());
+                $result->title('Not Found');
+                $result->message("Not Found");
                 $result->data(null);
                 return $result;
             }

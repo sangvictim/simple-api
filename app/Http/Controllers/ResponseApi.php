@@ -8,7 +8,7 @@ class ResponseApi extends JsonResponse
 {
   protected string $message;
   protected string $title;
-  protected mixed $data = [];
+  protected mixed $data;
 
   function __construct()
   {
