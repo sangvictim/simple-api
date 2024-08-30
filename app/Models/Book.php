@@ -11,6 +11,8 @@ class Book extends Model
 {
     use HasFactory, HasUlids;
 
+    protected $table = 'books';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -20,6 +22,15 @@ class Book extends Model
         'title',
         'description',
         'publish_date',
+        'author_id',
+    ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
         'author_id',
     ];
 

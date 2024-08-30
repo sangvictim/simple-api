@@ -15,6 +15,8 @@ class Author extends Authenticatable
 {
     use HasFactory, Notifiable, HasUlids, SoftDeletes;
 
+    protected $table = 'authors';
+
     /**
      * The attributes that are mass assignable.
      *

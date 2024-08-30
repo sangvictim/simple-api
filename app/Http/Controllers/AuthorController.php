@@ -54,7 +54,7 @@ class AuthorController extends Controller
         });
 
         // return success
-        $response->setStatusCode(Response::HTTP_OK);
+        $response->setStatusCode(Response::HTTP_CREATED);
         $response->title('Author');
         $response->message('Successfully created');
         return $response;
@@ -138,8 +138,21 @@ class AuthorController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function books()
+    public function books(Request $request)
     {
-        //
+        // find and valdate author
+        $author = Author::where('id', $request->id)->with([
+            'books' => function ($query) {
+                $query->select('id', 'title', 'description', 'publish_date', 'author_id');
+            }
+        ])->get();
+
+        // return success
+        $response = new ResponseApi;
+        $response->setStatusCode(Response::HTTP_OK);
+        $response->title('Detail of Author');
+        $response->message('Detail of Author');
+        $response->data($author);
+        return $response;
     }
 }
