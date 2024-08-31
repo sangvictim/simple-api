@@ -84,4 +84,27 @@ class AuthorTest extends TestCase
 
     $response->assertStatus(200);
   }
+
+  /**
+   * tets route not found
+   */
+  public function test_route_not_found(): void
+  {
+    $response = $this->get('/api/xxx');
+
+    $response->assertStatus(404);
+  }
+
+  /**
+   * test validation request
+   */
+  public function test_validation_create_authors(): void
+  {
+    $response = $this->post('/api/authors', [
+      'bio' => fake()->address(),
+      'birth_date' => fake()->date(),
+    ]);
+
+    $response->assertStatus(422);
+  }
 }
