@@ -8,6 +8,7 @@ simple API
 5. Run ```composer fresh``` for database migrate and seed
 6. Run ```php artisan test``` for run test
 7. Run ```php artisan serve``` for run this project
+8. Reason choise laravel [here](https://github.com/sangvictim/simple-api/blob/main/write-up.md)
 
 ## Author Route List
 | No  |  Method |  Url |
